@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <title>Hello</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+      function handleClick(language, msg) {
+        axios
+          .post("http://localhost:3000/language/", { lan: language, msg: msg })
+          .then((result) => {
+            document.getElementById("msg").innerHTML = result.data;
+          });
+      }
+
+      function init() {
+        axios.get("http://localhost:3000/language_all").then((result) => {
+          const lan_box = document.getElementById("language_box");
+
+          result.data.map((c) => {
+            const input = document.createElement("input");
+            input.type = "button";
+            input.value = c.language;
+            input.addEventListener("click", () => {
+              handleClick(c.language, c.msg);
+            });
+
+            lan_box.appendChild(input);
+          });
+        });
+      }
+
+      const a = 1;
+      const b = 2;
+
+      const gotoReg = () => {
+        location.href = "reg.html?a=" + a + "&b=" + b;
+      };
+
+      const del = () => {
+        location.href = "del.html";
+      };
+
+      const update = () => {
+        location.href = "update.html";
+      };
+    </script>
+  </head>
+
+  <body onload="init();">
+    <div id="language_box">
+      <div id="msg">Select Language</div>
+
+      <input type="button" value="登録" onclick="gotoReg();" />
+      <input type="button" value="修正" onclick="update();" />
+      <input type="button" value="削除" onclick="del();" />
+    </div>
+  </body>
+</html>

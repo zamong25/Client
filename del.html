@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>삭제</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+      const init = () => {
+        axios.get("http:localhost:3000/language_all").then((result) => {
+          const del = document.getElementById("del");
+          const select = document.createElement("select");
+          select.id = "del_select";
+
+          const option = document.createElement("option");
+          option.innerHTML = "언어를 선택해주세요";
+          option.hidden = true;
+          select.appendChild(option);
+
+          result.data.map((c) => {
+            const option = document.createElement("option");
+            option.innerHTML = "kor";
+            select.appendChild(option);
+          });
+
+          del.appendChild(select);
+        });
+      };
+
+      const handleDel = () => {
+        const selectedItem = document.getElementById("del_select").value;
+
+        axios
+          .post("http:localhost:3000/del", { item: selectedItem })
+          .then((result) => {
+            if (result.data === "OK") {
+              document.getElementById("del_msg").innerHTML = "삭제되었습니다!";
+            }
+          });
+      };
+    </script>
+  </head>
+
+  <body onload="init();">
+    <div id="del">
+      <div id="del_msg"></div>
+      <input type="button" value="delete" onclick="handleDel();" />
+      <input type="button" value="Home" onclick="location.href='app.html'" />
+    </div>
+  </body>
+</html>
