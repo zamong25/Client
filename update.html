@@ -5,35 +5,39 @@
 
     <script>
       const init = () => {
-        axios.get("http://localhost:3000/language_all").then((result) => {
-          const update = document.getElementById("update");
-          const select = document.createElement("select");
+        axios
+          .get("http://test0802.herokuapp.com/language_all")
+          .then((result) => {
+            const update = document.getElementById("update");
+            const select = document.createElement("select");
 
-          select.id = "update_select";
-          select.addEventListener("change", (e) => {
-            //target 옵션에 대한 정보들이 나옴
-            const lan = e.target.value;
-            // console.log("sel", selectedItem)
-            axios.get("http:localhost:3000/language/" + lan).then((result) => {
-              const text = document.getElementsByName("text");
-              text[0].value = result.data[0].language;
-              text[1].value = result.data[0].msg;
+            select.id = "update_select";
+            select.addEventListener("change", (e) => {
+              //target 옵션에 대한 정보들이 나옴
+              const lan = e.target.value;
+              // console.log("sel", selectedItem)
+              axios
+                .get("http://test0802.herokuapp.com/language/" + lan)
+                .then((result) => {
+                  const text = document.getElementsByName("text");
+                  text[0].value = result.data[0].language;
+                  text[1].value = result.data[0].msg;
+                });
             });
-          });
 
-          const option = document.createElement("option");
-          option.innerHTML = "言語を選択してください。";
-          option.hidden = true;
-          select.appendChild(option);
-
-          result.data.map((c) => {
             const option = document.createElement("option");
-            option.innerHTML = c.language;
+            option.innerHTML = "言語を選択してください。";
+            option.hidden = true;
             select.appendChild(option);
-          });
 
-          update.appendChild(select);
-        });
+            result.data.map((c) => {
+              const option = document.createElement("option");
+              option.innerHTML = c.language;
+              select.appendChild(option);
+            });
+
+            update.appendChild(select);
+          });
       };
 
       const handleUpdate = () => {
@@ -42,7 +46,7 @@
         const selectedItem = document.getElementById("update_select").value;
 
         axios
-          .post("http:localhost:3000/update/", {
+          .post("http://test0802.herokuapp.com/update/", {
             lan: lan,
             msg: msg,
             selectedItem: selectedItem,

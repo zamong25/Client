@@ -5,31 +5,33 @@
 
     <script>
       const init = () => {
-        axios.get("http:localhost:3000/language_all").then((result) => {
-          const del = document.getElementById("del");
-          const select = document.createElement("select");
-          select.id = "del_select";
+        axios
+          .get("http://test0802.herokuapp.com/language_all")
+          .then((result) => {
+            const del = document.getElementById("del");
+            const select = document.createElement("select");
+            select.id = "del_select";
 
-          const option = document.createElement("option");
-          option.innerHTML = "言語を選択してください。";
-          option.hidden = true;
-          select.appendChild(option);
-
-          result.data.map((c) => {
             const option = document.createElement("option");
-            option.innerHTML = c.language;
+            option.innerHTML = "言語を選択してください。";
+            option.hidden = true;
             select.appendChild(option);
-          });
 
-          del.appendChild(select);
-        });
+            result.data.map((c) => {
+              const option = document.createElement("option");
+              option.innerHTML = c.language;
+              select.appendChild(option);
+            });
+
+            del.appendChild(select);
+          });
       };
 
       const handleDel = () => {
         const selectedItem = document.getElementById("del_select").value;
 
         axios
-          .post("http:localhost:3000/del", { item: selectedItem })
+          .post("http://test0802.herokuapp.com/del", { item: selectedItem })
           .then((result) => {
             if (result.data === "OK") {
               document.getElementById("del_msg").innerHTML = "削除しました。";

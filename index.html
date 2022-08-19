@@ -7,28 +7,33 @@
     <script>
       function handleClick(language, msg) {
         axios
-          .post("http:localhost:3000/language/", { lan: language, msg: msg })
+          .post("http://test0802.herokuapp.com/language/", {
+            lan: language,
+            msg: msg,
+          })
           .then((result) => {
             document.getElementById("msg").innerHTML = result.data;
           });
       }
 
       function init() {
-        axios.get("http:localhost:3000/language_all").then((result) => {
-          const lan_box = document.getElementById("language_box");
+        axios
+          .get("http://test0802.herokuapp.com/language_all")
+          .then((result) => {
+            const lan_box = document.getElementById("language_box");
 
-          result.data.map((c) => {
-            const input = document.createElement("input");
-            input.type = "button";
-            input.value = c.language;
-            input.addEventListener("click", () => {
-              console.log(c.language, c.msg);
-              handleClick(c.language, c.msg);
+            result.data.map((c) => {
+              const input = document.createElement("input");
+              input.type = "button";
+              input.value = c.language;
+              input.addEventListener("click", () => {
+                console.log(c.language, c.msg);
+                handleClick(c.language, c.msg);
+              });
+
+              lan_box.appendChild(input);
             });
-
-            lan_box.appendChild(input);
           });
-        });
       }
 
       const gotoReg = () => {
