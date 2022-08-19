@@ -8,18 +8,16 @@
         axios.get("http://localhost:3000/language_all").then((result) => {
           const update = document.getElementById("update");
           const select = document.createElement("select");
+
           select.id = "update_select";
           select.addEventListener("change", (e) => {
             //target 옵션에 대한 정보들이 나옴
             const lan = e.target.value;
-            console.log("lan1", lan);
             // console.log("sel", selectedItem)
             axios.get("http:localhost:3000/language/" + lan).then((result) => {
               const text = document.getElementsByName("text");
               text[0].value = result.data[0].language;
               text[1].value = result.data[0].msg;
-              console.log(text[0].value);
-              console.log(text[1].value);
             });
           });
 

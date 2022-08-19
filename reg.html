@@ -10,7 +10,7 @@
         const msg = document.getElementByName("msg")[0].value;
 
         axios
-          .post("http:localhost:3000/reg", { lan: lan, msg: msg })
+          .post("http://test0802.herokuapp.com/reg", { lan: lan, msg: msg })
           .then((result) => {
             if (result.data === "OK") {
               document.getElementById("reg_msg").innerHTML = "등록되었습니다!";

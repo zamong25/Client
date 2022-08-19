@@ -7,14 +7,14 @@
     <script>
       function handleClick(language, msg) {
         axios
-          .post("http://localhost:3000/language/", { lan: language, msg: msg })
+          .post("http:localhost:3000/language/", { lan: language, msg: msg })
           .then((result) => {
             document.getElementById("msg").innerHTML = result.data;
           });
       }
 
       function init() {
-        axios.get("http://localhost:3000/language_all").then((result) => {
+        axios.get("http:localhost:3000/language_all").then((result) => {
           const lan_box = document.getElementById("language_box");
 
           result.data.map((c) => {
@@ -22,6 +22,7 @@
             input.type = "button";
             input.value = c.language;
             input.addEventListener("click", () => {
+              console.log(c.language, c.msg);
               handleClick(c.language, c.msg);
             });
 
@@ -30,11 +31,8 @@
         });
       }
 
-      const a = 1;
-      const b = 2;
-
       const gotoReg = () => {
-        location.href = "reg.html?a=" + a + "&b=" + b;
+        location.href = "reg.html";
       };
 
       const del = () => {
