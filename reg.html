@@ -6,8 +6,10 @@
     <script>
       const handleReg = () => {
         //Name은 컴퓨터가 값을 받을 때 한개 있는지 두개 있는지 모르기때문에 순서를 지정해줘야함
-        const lan = document.getElementByName("lan")[0].value;
-        const msg = document.getElementByName("msg")[0].value;
+        const lan = document.getElementsByName("lan")[0].value;
+        const msg = document.getElementsByName("msg")[0].value;
+
+        console.log(lan);
 
         axios
           .post("http://test0802.herokuapp.com/reg", { lan: lan, msg: msg })
