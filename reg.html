@@ -12,7 +12,7 @@
         console.log(lan);
 
         axios
-          .post("http://test0802.herokuapp.com/reg", { lan: lan, msg: msg })
+          .post("https://test0802.herokuapp.com/reg", { lan: lan, msg: msg })
           .then((result) => {
             if (result.data === "OK") {
               document.getElementById("reg_msg").innerHTML = "등록되었습니다!";

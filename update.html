@@ -6,7 +6,7 @@
     <script>
       const init = () => {
         axios
-          .get("http://test0802.herokuapp.com/language_all")
+          .get("https://test0802.herokuapp.com/language_all")
           .then((result) => {
             const update = document.getElementById("update");
             const select = document.createElement("select");
@@ -17,7 +17,7 @@
               const lan = e.target.value;
               // console.log("sel", selectedItem)
               axios
-                .get("http://test0802.herokuapp.com/language/" + lan)
+                .get("https://test0802.herokuapp.com/language/" + lan)
                 .then((result) => {
                   const text = document.getElementsByName("text");
                   text[0].value = result.data[0].language;
@@ -46,7 +46,7 @@
         const selectedItem = document.getElementById("update_select").value;
 
         axios
-          .post("http://test0802.herokuapp.com/update/", {
+          .post("https://test0802.herokuapp.com/update/", {
             lan: lan,
             msg: msg,
             selectedItem: selectedItem,

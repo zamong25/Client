@@ -6,7 +6,7 @@
     <script>
       const init = () => {
         axios
-          .get("http://test0802.herokuapp.com/language_all")
+          .get("https://test0802.herokuapp.com/language_all")
           .then((result) => {
             const del = document.getElementById("del");
             const select = document.createElement("select");
@@ -31,7 +31,7 @@
         const selectedItem = document.getElementById("del_select").value;
 
         axios
-          .post("http://test0802.herokuapp.com/del", { item: selectedItem })
+          .post("https://test0802.herokuapp.com/del", { item: selectedItem })
           .then((result) => {
             if (result.data === "OK") {
               document.getElementById("del_msg").innerHTML = "削除しました。";
